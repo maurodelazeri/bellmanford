@@ -15,8 +15,7 @@ int main() {
     graph->add_node("3");
     graph->add_node("4");
 
-    graph->add_edge("0", "1", 2);
-    graph->add_edge("1", "0", 1);
+    graph->add_edge("0", "1", -1);
     graph->add_edge("0", "2", 4);
     graph->add_edge("1", "2", 3);
     graph->add_edge("1", "3", 2);
@@ -28,7 +27,6 @@ int main() {
     std::vector<std::vector<std::string>> vec;
     cout << graph->bellman_ford("0",vec) << endl;
     
-    cout << graph->bellman_ford("LINK",vec) << endl;
     for (auto const &x : vec) {
        cout << x[0] << " - " << x[1] << endl;
     }
@@ -39,24 +37,22 @@ int main() {
 
     return 0;
 }
+
 ```
 
 ![](9tX9a5R.png)
 
 ```
-0 - 0
-1 - 2
-2 - 4
-3 - 1
-4 - 4
-
-
 0
+0 - 0
+1 - -1
+2 - 2
+3 - -2
+4 - 1
 0: 
-	weight: 2 to: 1
+	weight: -1 to: 1
 	weight: 4 to: 2
 1: 
-	weight: 1 to: 0
 	weight: 3 to: 2
 	weight: 2 to: 3
 	weight: 2 to: 4
@@ -66,7 +62,6 @@ int main() {
 	weight: 1 to: 1
 4: 
 	weight: -3 to: 3
-
 
 ```
 

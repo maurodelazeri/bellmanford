@@ -3,4 +3,4 @@ project(currencytests)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(currencytests main.cpp)
+add_executable(currencytests main.cpp directed_graph.h directed_graph.cc)
