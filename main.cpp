@@ -12,7 +12,8 @@ int main() {
     graph->add_node("3");
     graph->add_node("4");
 
-    graph->add_edge("0", "1", -1);
+    graph->add_edge("0", "1", 2);
+    graph->add_edge("1", "0", 1);
     graph->add_edge("0", "2", 4);
     graph->add_edge("1", "2", 3);
     graph->add_edge("1", "3", 2);
@@ -23,7 +24,6 @@ int main() {
 
     std::vector<std::vector<std::string>> vec;
     cout << graph->bellman_ford("0",vec) << endl;
-    cout << "mauro" << endl;
     for (auto const &x : vec) {
         cout << x[0] << " - " << x[1] << endl;
     }
