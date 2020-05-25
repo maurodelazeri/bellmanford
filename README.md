@@ -1,5 +1,4 @@
-# bellmanford
-Bellman–Ford Algorithm
+# Bellman–Ford Algorithm
 
 ![](9tX9a5R.png)
 ```
