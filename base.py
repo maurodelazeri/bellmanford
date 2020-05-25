@@ -3,8 +3,17 @@ import matplotlib.pyplot as plt
 
 G = nx.DiGraph()
 G.add_edge('BTC', 'USD', weight=7800, title='BTC-USD', subtitle='testing')
-G.add_edge('BTC', 'XRP', weight=1, title='ab', subtitle='testing')
+G.add_edge('ETH', 'BTC', weight=1, title='ab', subtitle='testing')
+G.add_edge('ETH', 'USD', weight=1, title='ab', subtitle='testing')
+G.add_edge('LTC', 'BTC', weight=1, title='ab', subtitle='testing')
+G.add_edge('LTC', 'USD', weight=1, title='ab', subtitle='testing')
+G.add_edge('XRP', 'BTC', weight=1, title='ab', subtitle='testing')
 G.add_edge('XRP', 'USD', weight=1, title='ab', subtitle='testing')
+G.add_edge('BCH', 'BTC', weight=1, title='ab', subtitle='testing')
+G.add_edge('BCH', 'USD', weight=1, title='ab', subtitle='testing')
+G.add_edge('LINK', 'BTC', weight=1, title='ab', subtitle='testing')
+G.add_edge('LINK', 'ETH', weight=1, title='ab', subtitle='testing')
+
 edge_labels = nx.get_edge_attributes(G, 'weight')
 print(edge_labels)
 

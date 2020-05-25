@@ -1,150 +1,119 @@
-// A C++ program for Bellman-Ford's single source 
-// shortest path algorithm. 
-#include <bits/stdc++.h>
-#include <unordered_map>
 #include <iostream>
+#include "graph.h"
 
 using namespace std;
 
-std::unordered_map<int, std::string> names_ = {{0, "BTC"},
-                                               {1, "USD"},
-                                               {2, "ETH"},
-                                               {3, "LTC"},
-                                               {4, "XRP"},
-                                               {5, "LINK"},
-                                               {6, "BCH"},
-                                               {7, "XLM"}};
+int main(int argc, char *argv[]) {
 
-enum {
-    BTC, USD, ETH, LTC, XRP, LINK, BCH, XLM, n_vertices
-};
+/*
+    graph dij(8);
+    dij.add_edge(0,2,4,0);
+    dij.add_edge(0,5,7,0);
+    dij.add_edge(2,3,3,0);
+    dij.add_edge(2,5,2,0);
+    dij.add_edge(5,6,8,0);
+    dij.add_edge(2,6,9,0);
+    dij.add_edge(3,4,3,0);
+    dij.add_edge(3,6,7,0);
+    dij.add_edge(6,4,2,0);
+    dij.add_edge(6,7,3,0);
+    dij.add_edge(4,7,7,0);
+    dij.add_edge(7,1,3,0);
+    // dij.add_edge(4,1,9,0);
+    dij.Dijkstra(0,1);
+    dij.add_edge(4,1,4,0);
+*/
+    // dij.GreedyBFS(0, 2,1);
+    /*
+       cout << "------------- Graph test 5 (Floyd Warshall) -------------\n";
+       graph floyd(5);
+       floyd.add_edge(0,3,3,1);
+       floyd.add_edge(0,2,6,1);
+       floyd.add_edge(1,0,3,1);
+       floyd.add_edge(2,3,2,1);
+       floyd.add_edge(3,2,1,1);
+       floyd.add_edge(3,1,1,1);
+       floyd.add_edge(4,1,4,1);
+       floyd.add_edge(4,3,2,1);
+       floyd.print();
+       auto pair = floyd.floydWarshall();
+       pair.first.print();
+       pair.second.print();
+       // https://www.geeksforgeeks.org/wp-content/uploads/Fig-11.jpg
+       graph dij(9);
+       dij.add_edge(0,1,4,0);
+       dij.add_edge(0,7,8,0);
+       dij.add_edge(1,7,11,0);
+       dij.add_edge(1,2,8,0);
+       dij.add_edge(7,8,7,0);
+       dij.add_edge(7,6,1,0);
+       dij.add_edge(8,2,2,0);
+       dij.add_edge(8,6,6,0);
+       dij.add_edge(2,5,4,0);
+       dij.add_edge(6,5,2,0);
+       dij.add_edge(2,3,7,0);
+       dij.add_edge(3,5,14,0);
+       dij.add_edge(5,4,10,0);
+       dij.add_edge(3,4,9,0);
+       // https://www.youtube.com/watch?v=obWXjtg0L64
+       graph bellman(6);
+       bellman.add_edge("F", "E", 8, 1);
+       bellman.add_edge("F", "A", 10, 1);
+       bellman.add_edge("A", "C", 2, 1);
+       bellman.add_edge("B", "A", 1, 1);
+       bellman.add_edge("C", "B", -2, 1);
+       bellman.add_edge("D", "C", -1, 1);
+       bellman.add_edge("D", "A", -4, 1);
+       bellman.add_edge("E", "D", 1, 1);
+       bellman.add_edge("A", "C", 2, 1);
+       bellman.print();
+       bellman.bellmanFord("F");
+       graph bellman(5);
+       bellman.add_edge("A", "B", -1, 1);
+       bellman.add_edge("A", "C", 4, 1);
+       bellman.add_edge("B", "C", 3, 1);
+       bellman.add_edge("B", "D", 2, 1);
+       bellman.add_edge("B", "E", 2, 1);
+       bellman.add_edge("A", "C", 4, 1);
+       bellman.add_edge("D", "B", 1, 1);
+       bellman.add_edge("A", "C", 4, 1);
+       bellman.add_edge("D", "C", 5, 1);
+       bellman.add_edge("E", "D", 3, 1);
+       bellman.print();
+       bellman.bellmanFord("F", 1);
+   */
 
-// a structure to represent a weighted edge in graph
-struct Edge {
-    int src, dest;
-    double weight;
-};
+    graph Graph;
+    Graph.add_node(1, 0, 0);
+    Graph.add_node(2, 1, 2);
+    Graph.add_node(3, 1, 0);
+    Graph.add_node(4, 1, -2);
+    Graph.add_node(5, 3, 2);
+    Graph.add_node(6, 3, 0);
+    Graph.add_node(7, 3, -2);
+    Graph.add_node(8, 5, -2);
+    Graph.add_node(9, 5, 0);
 
-// a structure to represent a connected, directed and
-// weighted graph
-struct Graph {
-    // V-> Number of vertices, E-> Number of edges
-    int V, E;
+    Graph.add_edge(1, 2, 5, true);
+    Graph.add_edge(1, 3, 25, true);
+    Graph.add_edge(2, 5, 11, true);
+    Graph.add_edge(2, 6, 33, true);
+    Graph.add_edge(3, 4, 17, true);
+    Graph.add_edge(3, 6, 38, true);
+    Graph.add_edge(4, 7, 12, true);
+    Graph.add_edge(5, 6, 21, true);
+    Graph.add_edge(5, 9, 1, true);
+    Graph.add_edge(6, 4, 4, true);
+    Graph.add_edge(6, 7, 3, true);
+    Graph.add_edge(7, 8, 50, true);
+    Graph.add_edge(8, 6, 41, true);
+    Graph.add_edge(9, 6, 2, true);
+    Graph.add_edge(9, 8, 14, true);
 
-    // graph is represented as an array of edges.
-    struct Edge *edge;
-};
 
-// Creates a graph with V vertices and E edges
-struct Graph *createGraph(int V, int E) {
-    auto *graph = new Graph;
-    graph->V = V;
-    graph->E = E;
-    graph->edge = new Edge[E];
-    return graph;
+    cout << "\nbellmanFord:\n";
+    Graph.bellmanFord(5, true);
+
+
+    return EXIT_SUCCESS;
 }
-
-// A utility function used to print the solution
-void printArr(double dist[], int n) {
-    printf("Vertex   Distance from Source\n");
-    for (int i = 0; i < n; ++i) {
-        printf("%s \t\t %f\n", names_[i].c_str(), dist[i]);
-    }
-}
-
-// The main function that finds shortest distances from src to
-// all other vertices using Bellman-Ford algorithm.  The function
-// also detects negative weight cycle
-void BellmanFord(struct Graph *graph, int src) {
-    int V = graph->V;
-    int E = graph->E;
-    double dist[V];
-
-    // Step 1: Initialize distances from src to all other vertices
-    // as INFINITE
-    for (int i = 0; i < V; i++)
-        dist[i] = DBL_MAX;
-    dist[src] = 0;
-
-    // Step 2: Relax all edges |V| - 1 times. A simple shortest
-    // path from src to any other vertex can have at-most |V| - 1
-    // edges
-    for (int i = 1; i <= V - 1; i++) {
-        for (int j = 0; j < E; j++) {
-            int u = graph->edge[j].src;
-            int v = graph->edge[j].dest;
-            double weight = graph->edge[j].weight;
-            if (dist[u] != DBL_MAX && dist[u] + weight < dist[v])
-                dist[v] = dist[u] + weight;
-        }
-    }
-
-    // Step 3: check for negative-weight cycles.  The above step
-    // guarantees shortest distances if graph doesn't contain
-    // negative weight cycle.  If we get a shorter path, then there
-    // is a cycle.
-    for (int i = 0; i < E; i++) {
-        int u = graph->edge[i].src;
-        int v = graph->edge[i].dest;
-        double weight = graph->edge[i].weight;
-        if (dist[u] != DBL_MAX && dist[u] + weight < dist[v]) {
-            printf("Graph contains negative weight cycle");
-            return; // If negative cycle is detected, simply return
-        }
-    }
-
-    printArr(dist, V);
-}
-
-// Driver program to test above functions
-int main() {
-    /* Let us create the graph given in above example */
-    int V = 5; // Number of vertices in graph
-    int E = 8; // Number of edges in graph
-    struct Graph *graph = createGraph(V, E);
-
-    // add edge 0-1 (or A-B in above figure)
-    graph->edge[BTC].src = BTC;
-    graph->edge[BTC].dest = USD;
-    graph->edge[BTC].weight = -1;
-
-    //enum { BTC, USD, ETH, LTC, XRP, LINK, BCH, XLM, n_vertices };
-    // add edge 0-2 (or A-C in above figure)
-    graph->edge[USD].src = BTC;
-    graph->edge[USD].dest = ETH;
-    graph->edge[USD].weight = 4;
-
-    // add edge 1-2 (or B-C in above figure)
-    graph->edge[ETH].src = USD;
-    graph->edge[ETH].dest = ETH;
-    graph->edge[ETH].weight = 3;
-
-    // add edge 1-3 (or B-D in above figure)
-    graph->edge[LTC].src = USD;
-    graph->edge[LTC].dest = LTC;
-    graph->edge[LTC].weight = 2;
-
-    // add edge 1-4 (or A-E in above figure)
-    graph->edge[XRP].src = USD;
-    graph->edge[XRP].dest = XRP;
-    graph->edge[XRP].weight = 2;
-
-    // add edge 3-2 (or D-C in above figure)
-    graph->edge[LINK].src = LTC;
-    graph->edge[LINK].dest = ETH;
-    graph->edge[LINK].weight = 5;
-
-    // add edge 3-1 (or D-B in above figure)
-    graph->edge[BCH].src = LTC;
-    graph->edge[BCH].dest = USD;
-    graph->edge[BCH].weight = USD;
-
-    // add edge 4-3 (or E-D in above figure)
-    graph->edge[XLM].src = XRP;
-    graph->edge[XLM].dest = LTC;
-    graph->edge[XLM].weight = -3;
-
-    BellmanFord(graph, BTC);
-
-    return 0;
-} 
