@@ -24,6 +24,12 @@ int main() {
 
     std::vector<std::vector<std::string>> vec;
     cout << graph->bellman_ford("0",vec) << endl;
+    
+    cout << graph->bellman_ford("LINK",vec) << endl;
+    for (auto const &x : vec) {
+       cout << x[0] << " - " << x[1] << endl;
+    }
+
     graph->print();
 
     delete graph;
