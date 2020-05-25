@@ -1,10 +1,3 @@
-/*
-	Description: Directed Graph container designed to facilitate bellman-ford algorithm.
-
-	Author: Gabriel Ferrin
-	Date: May 7th 2013
-*/
-#define BUILDING_NODE_EXTENSION
 #ifndef DIRECTED_GRAPH_H
 #define DIRECTED_GRAPH_H
 
