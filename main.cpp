@@ -1,6 +1,23 @@
 // A C++ program for Bellman-Ford's single source 
 // shortest path algorithm. 
 #include <bits/stdc++.h>
+#include <unordered_map>
+#include <iostream>
+
+using namespace std;
+
+std::unordered_map<int, std::string> names_ = {{0, "BTC"},
+                                               {1, "USD"},
+                                               {2, "ETH"},
+                                               {3, "LTC"},
+                                               {4, "XRP"},
+                                               {5, "LINK"},
+                                               {6, "BCH"},
+                                               {7, "XLM"}};
+
+enum {
+    BTC, USD, ETH, LTC, XRP, LINK, BCH, XLM, n_vertices
+};
 
 // a structure to represent a weighted edge in graph
 struct Edge {
@@ -30,8 +47,9 @@ struct Graph *createGraph(int V, int E) {
 // A utility function used to print the solution
 void printArr(double dist[], int n) {
     printf("Vertex   Distance from Source\n");
-    for (int i = 0; i < n; ++i)
-        printf("%d \t\t %f\n", i, dist[i]);
+    for (int i = 0; i < n; ++i) {
+        printf("%s \t\t %f\n", names_[i].c_str(), dist[i]);
+    }
 }
 
 // The main function that finds shortest distances from src to
@@ -86,46 +104,47 @@ int main() {
     struct Graph *graph = createGraph(V, E);
 
     // add edge 0-1 (or A-B in above figure)
-    graph->edge[0].src = 0;
-    graph->edge[0].dest = 1;
-    graph->edge[0].weight = -1;
+    graph->edge[BTC].src = BTC;
+    graph->edge[BTC].dest = USD;
+    graph->edge[BTC].weight = -1;
 
+    //enum { BTC, USD, ETH, LTC, XRP, LINK, BCH, XLM, n_vertices };
     // add edge 0-2 (or A-C in above figure)
-    graph->edge[1].src = 0;
-    graph->edge[1].dest = 2;
-    graph->edge[1].weight = 4;
+    graph->edge[USD].src = BTC;
+    graph->edge[USD].dest = ETH;
+    graph->edge[USD].weight = 4;
 
     // add edge 1-2 (or B-C in above figure)
-    graph->edge[2].src = 1;
-    graph->edge[2].dest = 2;
-    graph->edge[2].weight = 3;
+    graph->edge[ETH].src = USD;
+    graph->edge[ETH].dest = ETH;
+    graph->edge[ETH].weight = 3;
 
     // add edge 1-3 (or B-D in above figure)
-    graph->edge[3].src = 1;
-    graph->edge[3].dest = 3;
-    graph->edge[3].weight = 2;
+    graph->edge[LTC].src = USD;
+    graph->edge[LTC].dest = LTC;
+    graph->edge[LTC].weight = 2;
 
     // add edge 1-4 (or A-E in above figure)
-    graph->edge[4].src = 1;
-    graph->edge[4].dest = 4;
-    graph->edge[4].weight = 2;
+    graph->edge[XRP].src = USD;
+    graph->edge[XRP].dest = XRP;
+    graph->edge[XRP].weight = 2;
 
     // add edge 3-2 (or D-C in above figure)
-    graph->edge[5].src = 3;
-    graph->edge[5].dest = 2;
-    graph->edge[5].weight = 5;
+    graph->edge[LINK].src = LTC;
+    graph->edge[LINK].dest = ETH;
+    graph->edge[LINK].weight = 5;
 
     // add edge 3-1 (or D-B in above figure)
-    graph->edge[6].src = 3;
-    graph->edge[6].dest = 1;
-    graph->edge[6].weight = 1;
+    graph->edge[BCH].src = LTC;
+    graph->edge[BCH].dest = USD;
+    graph->edge[BCH].weight = USD;
 
     // add edge 4-3 (or E-D in above figure)
-    graph->edge[7].src = 4;
-    graph->edge[7].dest = 3;
-    graph->edge[7].weight = -3;
+    graph->edge[XLM].src = XRP;
+    graph->edge[XLM].dest = LTC;
+    graph->edge[XLM].weight = -3;
 
-    BellmanFord(graph, 0);
+    BellmanFord(graph, BTC);
 
     return 0;
 } 
