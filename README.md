@@ -1,5 +1,8 @@
 # Bellman–Ford Algorithm
 
+
+![](9tX9a5R.png)
+
 ```c++
 #include <iostream>
 #include "directed_graph.h"
@@ -40,7 +43,6 @@ int main() {
 
 ```
 
-![](9tX9a5R.png)
 
 ```
 0
